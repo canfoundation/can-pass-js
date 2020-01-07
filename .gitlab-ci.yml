@@ -1,0 +1,63 @@
+image: node:10.16.3
+
+stages:
+  - test
+  - deploy
+variables:
+  RC_BRANCH: "rc"
+  TMP_GIT: $CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+before_script:
+  - export IS_OFFLINE=true
+  - export FORCE_COLOR=1
+  # Setup ssh
+  # https://docs.gitlab.com/ee/ci/ssh_keys/README.html#ssh-keys-when-using-the-docker-executor
+  #
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $LECLE_LOCAL_SERVER >> ~/.ssh/known_hosts
+  - ssh-keyscan git.baikal.io >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+  - git config --global user.email "op@baikal.io"
+  - git config --global user.name "ci-operator"
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+    - ${TMP_GIT}/
+
+test:
+  stage: test
+  tags:
+    - test
+  script:
+    - yarn
+    - yarn test --all
+  only:
+    - merge_requests
+
+deploy:
+  stage: deploy
+  tags:
+    - test
+  script:
+    - git clone git@git.baikal.io:${TMP_GIT}.git ${TMP_GIT}
+    - cd ${TMP_GIT}
+    - git checkout -B ${RC_BRANCH}
+    - git rebase origin/canary
+    - yarn
+    - yarn build
+    - git add -f lib/*
+    - git status
+    - git commit -m "auto build"
+    - git branch --set-upstream-to=origin/${RC_BRANCH} ${RC_BRANCH}
+    - git pull
+    - git push
+    - git checkout -
+
+  only:
+    - canary

@@ -1,0 +1,53 @@
+{
+  "name": "can-pass-js",
+  "version": "0.2.1",
+  "description": "Can Pass API SDK",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist lib && rollup -c && tsc -p .",
+    "watch": "yarn run build -w",
+    "test": "jest",
+    "prepare": "npm run build",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.baikal.io:can/can-pass-api.git"
+  },
+  "keywords": [
+    "can-pass"
+  ],
+  "author": "lecle",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.7",
+    "@rollup/plugin-commonjs": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "flow-bin": "^0.113.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "rollup": "^1.27.8",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-dotenv": "^0.2.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-uglify": "^6.0.3",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "insert-css": "^2.0.0"
+  }
+}

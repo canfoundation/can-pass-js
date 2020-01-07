@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Community</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-git2.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+    <style>
+      body {
+        padding: 50px;
+      }
+
+      form {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="ui form" onsubmit="createCommunity(); return false;">
+      <div class="field">
+        <label>Community Account</label>
+        <input type="text" name="account" placeholder="Account" />
+      </div>
+      <div class="field">
+        <label>Community Name</label>
+        <input type="text" name="name" placeholder="Name" />
+      </div>
+
+      <button class="ui primary button">Create</button>
+    </form>
+
+    <script>
+      require(["../dist/can-pass-api"], function(CanPass) {
+        CanPass.init({
+          clientId: "leonardo",
+          version: "1.0"
+        });
+
+        window.CanPass = CanPass;
+      });
+
+      const userAccount = "david1313131"; // password: davidhazeland
+
+      function createCommunity() {
+        const formData = $("form").serializeArray();
+        const communityAccount = formData[0].value;
+        const communityName = formData[1].value;
+
+        const txBody = {
+          actions: [
+            {
+              account: "eosio.token",
+              authorization: [{ actor: userAccount, permission: "active" }],
+              data: {
+                from: userAccount,
+                memo: communityAccount,
+                quantity: "10.0000 CAT",
+                to: "governance22"
+              },
+              name: "transfer"
+            },
+            {
+              account: "governance22",
+              name: "create",
+              authorization: [
+                {
+                  actor: userAccount,
+                  permission: "active"
+                }
+              ],
+              data: {
+                creator: userAccount,
+                community_account: communityAccount,
+                community_name: communityName,
+                member_badge: [],
+                community_url: "mycommunity.url",
+                description: "this is my community for test",
+                create_default_code: true
+              }
+            }
+          ]
+        };
+
+        try {
+          return CanPass.signTx(txBody, userAccount)
+            .then(tx => {
+              console.log(tx);
+              alert("Your community has been created!");
+            })
+            .catch(err => {
+              alert(err.message);
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    </script>
+  </body>
+</html>
