@@ -1,4 +1,12 @@
 language: node_js
 node_js:
   - stable
-  - '10'
+  - "10"
+deploy:
+  provider: npm
+  email: badgecrypto@gmail.com
+  api_key:
+    secure: xUyfD7JJO+E3l8clHwSgExh2gU+BmU7D7sPE9+r2F8BMRW0EdCWfRM1OPM0gxSSrLg891qx81bvJYhDp/5731ULHje32k2K2yBs7ET6eE4WDkz3bMYiaxQz0hKykrRZdcgRPZgbfv4VclAmxTBKDepzg4YLHN3QHX7i1Si6b0F0+hzfIBCzxnvGKDaUUQR4RyafC4ZgyqE4M2T3+s7c3RW+HLmvcXJ88xgsfbeoaQKiRcRdhh4rVkwJduflEHuxkdK9PabH2MbYyQG8pCoyBZWQwLPqu3UzcqiRXPiLwtWNp1SlLquPbk9l4pbsAZeBT6y9g4DVze3nx2ZUmWEOrXM5n/fGWSJtPxys/+heON0i//HFeEpLbLZ1r4MWJcsfeCeBCUs+gos5bewYAOzQ/AwZA/mxH1doWau6zr05x5v6bPCS95DlYixPRv/6xwMcX4Qx9aATTcQEA+a6FI1ncdehdMP2JQ3k8ZZCk/GNfBgl1R58G1KZTys7MtL/YK38BB7r65sL3cARQEM1cy7buwhFFFhQnTELvDBZKq9zNzk7yX8yB9kkAzftDQodUlc2C9fRu7WdjmlWqIby8lcATmi3UNmnL8vNpSWFWVlHT7dxcBmyZrhd3W7hhFGT8mTQ2qzAwDa/W8QU+yWL56rNbIDtiJoZyOcbsghJAHlOycKE=
+  on:
+    tags: true
+    branch: master
