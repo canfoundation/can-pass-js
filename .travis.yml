@@ -1,4 +1,9 @@
 language: node_js
 node_js:
   - stable
-  - '10'
+  - "10"
+deploy:
+  api_key:
+    secure: 0wcjFaU7tSPx3mg9lhhIkwl8Hbw7WjDVUfvMaSwjw9ldmXm1yLcwgR55BWnmv1+JJeWlVw5YhN9XkQjG5hlgy8qTYEJxvo4Ezqdlgyl5W4Rv3oBaZICLY4PzwGXG0yDwvoPbWgLvFkdkSbW6b/Q/gDgdedpdy2WeDa/tgyzphTLbyIylUcnO/3F2X1D7CBh+S2/GxPKnAKIg/cKh3iTx9DMNmaS5GDqLtSNkj641X7FLon7tt4EiQBfNH1O0akVHy3BU+auNCk0+gKeDkkxu7pY/UgZ7Tm6qvs2mbS3UKDVeQXu08Bq4cSkU46+adkQL5wSS22bNebsvpDfhUSopJKdOzWFWMXj2hqy/qS1hXS3QeOh5KfeEsIWWQd3BNhgz6/O9e74KREx7RYvmx+S5lpXZPCrTh5tqRWGrCnQFS+r300i/9hRsgnFk0uj/3Jjrb7sXc5UVPNEv8POXEYQrzJc1lxlbrl+K+1oDJagZlQwtTTuXjo4vSJIL8Uejb7z1BmTSUhOnmFtMBlFA5f+4eyRiydlO7QNvEMuEgp5waexog+HG4K3xuhbgskkTCRo+PomLtmITByR2S2j1m4si/zjQ4kyj3LYImHA0as92sBzgbGWuNjnJ+xJdC+JmATuP6vWgd9m7PjrzofGCkmN3EaGi1ZJ4Jg8p7xiKnfEO5Yk=
+  on:
+    branch: master
