@@ -1,6 +1,6 @@
 # can-pass-api
 
-[![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
+[![Build Status](https://travis-ci.org/canfoundation/can-pass-js.svg?branch=master)](https://travis-ci.org/canfoundation/can-pass-js)
 
 It is a sdk for can-pass which facilitates 3rd party 's developers experience when they are working with can-pass api.
 
