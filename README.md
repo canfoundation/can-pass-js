@@ -55,10 +55,10 @@ The full script for embedding to your HTML
 
 #### Import via yarn or npm
 
-Run `yarn add http://git.baikal.io/can/can-pass-api.git` from terminal.
+Run `yarn add can-pass-js` from terminal.
 
 ```javascript
-import CanPass from "can-pass-api";
+import CanPass from "can-pass-js";
 
 CanPass.init({
   clientId: "{client-id}",
