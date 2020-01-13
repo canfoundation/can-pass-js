@@ -5,6 +5,8 @@
 
 [![https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/can-pass-js)
 
+[![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
+
 It is a sdk for can-pass which facilitates 3rd party 's developers experience when they are working with can-pass api.
 
 #### Loading the SDK
