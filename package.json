@@ -1,6 +1,6 @@
 {
   "name": "can-pass-js",
-  "version": "0.0.1",
+  "version": "0.9.5",
   "description": "Can Pass API SDK",
   "files": [
     "dist",
@@ -12,11 +12,11 @@
     "build": "rm -rf dist lib && rollup -c && tsc -p .",
     "watch": "yarn run build -w",
     "test": "jest",
-    "prepublish": "npm run build"
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",
-    "url": "git@git.baikal.io:can/can-pass-api.git"
+    "url": "https://github.com/canfoundation/can-pass-js"
   },
   "keywords": [
     "can-pass"

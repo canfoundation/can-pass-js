@@ -1,4 +1,11 @@
-# can-pass-api
+# can-pass-js
+
+[![Build Status](https://travis-ci.org/canfoundation/can-pass-js.svg?branch=master)](https://travis-ci.org/canfoundation/can-pass-js) 
+[![NPM](https://img.shields.io/npm/v/can-pass-js.svg)](https://www.npmjs.org/package/can-pass-js)
+
+[![https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/can-pass-js)
+
+[![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
 
 [![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
 
@@ -52,10 +59,10 @@ The full script for embedding to your HTML
 
 #### Import via yarn or npm
 
-Run `yarn add http://git.baikal.io/can/can-pass-api.git` from terminal.
+Run `yarn add can-pass-js` from terminal.
 
 ```javascript
-import CanPass from "can-pass-api";
+import CanPass from "can-pass-js";
 
 CanPass.init({
   clientId: "{client-id}",

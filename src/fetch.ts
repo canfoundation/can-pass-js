@@ -1,9 +1,8 @@
-import { global } from './utils';
+import { global } from "./utils";
 
-// eslint-disable-next-line import/no-mutable-exports
-let { fetch } = global;
+let fetch = global.fetch.bind(global);
 
-export const set = (f) => {
+export const set = f => {
   fetch = f;
 };
 
