@@ -1,6 +1,7 @@
 // @flow
 
 import { CAN_PASS_SIGN_TX_URL } from './constants';
+import logger from './logger';
 
 export const popup = (URL: string): Promise<any> => {
   if (typeof window === 'undefined') throw new Error('Not Browser');
@@ -38,9 +39,11 @@ export const popup = (URL: string): Promise<any> => {
       // }
 
       if (e.data) {
+        logger.debug('window opener return message', e.data);
         resolve(e.data);
         authWindow.close();
       } else {
+        logger.debug('window opener return error', e);
         authWindow.close();
         reject(new Error('Unauthorised'));
       }

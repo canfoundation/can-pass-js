@@ -3,6 +3,7 @@ import * as api from "./api";
 import * as ui from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
+import logger, { Logger } from './logger';
 
 declare global {
   interface Window {
@@ -15,6 +16,8 @@ export interface CanPassApiConfig {
   version: string;
   store?: string;
   fetch?: () => Promise<any>;
+  logger?: Logger;
+
 }
 
 const canPass = {
@@ -24,6 +27,8 @@ const canPass = {
 
     storage.write("clientId", config.clientId);
     storage.write("version", config.version);
+
+    logger.setLogger(config.logger);
     return config;
   },
 
@@ -69,6 +74,7 @@ const canPass = {
   },
 
   api() {
+    logger.debug('calling api method');
     return 0;
   }
 };
