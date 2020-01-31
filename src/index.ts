@@ -3,7 +3,7 @@ import * as api from "./api";
 import * as ui from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
-import logger, { Logger } from './logger';
+import logger, { Logger } from "./logger";
 
 declare global {
   interface Window {
@@ -17,7 +17,6 @@ export interface CanPassApiConfig {
   store?: string;
   fetch?: () => Promise<any>;
   logger?: Logger;
-
 }
 
 const canPass = {
@@ -42,12 +41,13 @@ const canPass = {
   signTx(
     tx: { actions: Array<any> },
     userId: string,
+    userName: string,
     callback?: (error: any, data?: any) => any
   ): Promise<any> {
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
-        fn(tx, userId, (err, result) => {
+        fn(tx, userId, userName, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -61,7 +61,7 @@ const canPass = {
       .requestTx(tx, userId)
       .then(requestedTx => {
         const { requestId } = requestedTx;
-        return ui.signTx(requestId, userId).then(data => {
+        return ui.signTx(requestId, userId, userName).then(data => {
           callback(null, data);
         });
       })
@@ -74,7 +74,7 @@ const canPass = {
   },
 
   api() {
-    logger.debug('calling api method');
+    logger.debug("calling api method");
     return 0;
   }
 };

@@ -87,7 +87,7 @@
         };
 
         try {
-          return CanPass.signTx(txBody, userAccount)
+          return CanPass.signTx(txBody, userAccount, userAccount)
             .then(tx => {
               console.log(tx);
               alert("Your community has been created!");
