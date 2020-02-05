@@ -61,11 +61,10 @@ const canPass = {
       .requestTx(tx, userId)
       .then(requestedTx => {
         const { requestId } = requestedTx;
-        return ui.signTx(requestId, userId, userName).then(data => {
-          callback(null, data);
-        });
+        return ui.signTx(requestId, userId, userName);
       })
-      .catch(err => callback(err));
+      .then(data => callback(null, data))
+      .catch(err => callback(err))
   },
 
   loginButton() {
