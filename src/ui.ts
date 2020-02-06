@@ -52,20 +52,18 @@ export const popup = (URL: string): Promise<any> => {
       //   reject(new Error('Not allowed'));
       // }
 
-      // remove eventListener on message event
-      window[eventRemoveMethod](messageEvent, eventHandler, false)
-
-
       if(!e.data){
         logger.debug("window opener return error", e);
+        window[eventRemoveMethod](messageEvent, eventHandler, false)
         authWindow.close();
         reject(new Error("No event data"));
       }
 
       if (e.data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
         logger.debug("window opener return message", e.data);
-        resolve(e.data);
+        window[eventRemoveMethod](messageEvent, eventHandler, false)
         authWindow.close();
+        resolve(e.data);
       } 
     }
     eventer(
@@ -89,6 +87,7 @@ export const signTx = (
         if (data.error) {
           reject(new Error(data.error));
         }
+        
         if (data.requestTxId === txId) {
           resolve(data.tx);
         }
