@@ -3,6 +3,7 @@ import * as api from "./api";
 import * as ui from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
+import logger, { Logger } from "./logger";
 
 declare global {
   interface Window {
@@ -15,6 +16,7 @@ export interface CanPassApiConfig {
   version: string;
   store?: string;
   fetch?: () => Promise<any>;
+  logger?: Logger;
 }
 
 const canPass = {
@@ -24,6 +26,8 @@ const canPass = {
 
     storage.write("clientId", config.clientId);
     storage.write("version", config.version);
+
+    logger.setLogger(config.logger);
     return config;
   },
 
@@ -37,12 +41,13 @@ const canPass = {
   signTx(
     tx: { actions: Array<any> },
     userId: string,
+    userName: string,
     callback?: (error: any, data?: any) => any
   ): Promise<any> {
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
-        fn(tx, userId, (err, result) => {
+        fn(tx, userId, userName, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -56,11 +61,10 @@ const canPass = {
       .requestTx(tx, userId)
       .then(requestedTx => {
         const { requestId } = requestedTx;
-        return ui.signTx(requestId, userId).then(data => {
-          callback(null, data);
-        });
+        return ui.signTx(requestId, userId, userName);
       })
-      .catch(err => callback(err));
+      .then(data => callback(null, data))
+      .catch(err => callback(err))
   },
 
   loginButton() {
@@ -69,6 +73,7 @@ const canPass = {
   },
 
   api() {
+    logger.debug("calling api method");
     return 0;
   }
 };

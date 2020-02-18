@@ -1,6 +1,6 @@
 {
   "name": "can-pass-js",
-  "version": "0.9.7",
+  "version": "0.9.14",
   "description": "Can Pass API SDK",
   "files": [
     "dist",

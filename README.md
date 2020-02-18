@@ -1,13 +1,9 @@
 # can-pass-js
 
-[![Build Status](https://travis-ci.org/canfoundation/can-pass-js.svg?branch=master)](https://travis-ci.org/canfoundation/can-pass-js) 
+[![Build Status](https://travis-ci.org/canfoundation/can-pass-js.svg?branch=master)](https://travis-ci.org/canfoundation/can-pass-js)
 [![NPM](https://img.shields.io/npm/v/can-pass-js.svg)](https://www.npmjs.org/package/can-pass-js)
 
 [![https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/can-pass-js)
-
-[![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
-
-[![Build Status](https://travis-ci.com/can-lab-lecle/can-pass-js.svg?branch=master)](https://travis-ci.com/can-lab-lecle/can-pass-js)
 
 It is a sdk for can-pass which facilitates 3rd party 's developers experience when they are working with can-pass api.
 
@@ -106,7 +102,7 @@ CanPass.init(options);
 
 ##### Sign a transaction
 
-`CanPass.signTx(tx, userId, callback)`
+`CanPass.signTx(tx, userId, userName, callback)`
 
 After call that, it will open a new window to operate signing transaction. Input secret code to sign transaction (Browser required)
 
@@ -115,7 +111,8 @@ After call that, it will open a new window to operate signing transaction. Input
 | Name     | Type                  | Description                                             |
 | -------- | --------------------- | ------------------------------------------------------- |
 | tx       | object                | The body of transaction. For example: `{ actions: [] }` |
-| userId   | string                | The username of CAN account                             |
+| userId   | string                | The userid of CAN account                               |
+| userName | string                | The username of CAN account                             |
 | callback | `(error, tx) => void` | The callback function when sign transaction.            |
 
 ##### Set credential manually
