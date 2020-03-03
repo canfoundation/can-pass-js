@@ -1,6 +1,6 @@
 import storage, { initialize as initializeStorage } from "./storage";
 import * as api from "./api";
-import * as ui from "./ui";
+import { openPopup, signTx } from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
 import logger, { Logger } from "./logger";
@@ -61,10 +61,10 @@ const canPass = {
       .requestTx(tx, userId)
       .then(requestedTx => {
         const { requestId } = requestedTx;
-        return ui.signTx(requestId, userId, userName);
+        return signTx(requestId, userId, userName);
       })
       .then(data => callback(null, data))
-      .catch(err => callback(err))
+      .catch(err => callback(err));
   },
 
   loginButton() {
@@ -125,4 +125,5 @@ if (typeof window !== "undefined") {
   window.CanPass = CanPass;
 }
 
+export { openPopup };
 export default canPass;
