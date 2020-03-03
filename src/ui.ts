@@ -41,6 +41,7 @@ export const openPopup = (asyncPopup?: boolean, url?: string) => {
     windowOpts
   );
   if (!asyncPopup) {
+    // a workaround way to handle if users close the pop-up
     const windowRef = randomString();
     window[CURRENT_WINDOW] = windowRef;
     window[windowRef] = authWindow;
