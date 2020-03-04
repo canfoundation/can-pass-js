@@ -1,49 +1,59 @@
 // @flow
-import storage from './storage';
-import { CAN_WALLET_GRAPHQL_ENDPOINT } from './constants';
-import fetch from './fetch';
+import storage from "./storage";
+import { CAN_WALLET_GRAPHQL_ENDPOINT } from "./constants";
+import fetch from "./fetch";
 
-export const graphql = (body: {query: string, variables: {}}): Promise<any> => {
-  const accessToken = storage.read('accessToken');
+export const graphql = (body: {
+  query: string;
+  variables: {};
+}): Promise<any> => {
+  const accessToken = storage.read("accessToken");
   const config = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bear ${accessToken}`,
+      "Content-Type": "application/json",
+      Authorization: `Bear ${accessToken}`
     },
     body: JSON.stringify({
       query: body.query,
-      variables: body.variables,
-    }),
+      variables: body.variables
+    })
   };
-  return new Promise((resolve, reject) => {
-    const parseJson = (res) => res.json();
-    return fetch(CAN_WALLET_GRAPHQL_ENDPOINT, config)
-      .then(parseJson)
-      .then((response) => {
-        if (response.errors) {
-          reject(response.errors);
-        } else {
-          resolve(response.data);
-        }
-      });
-  });
+  return fetch(CAN_WALLET_GRAPHQL_ENDPOINT, config)
+    .then(res => res.json())
+    .then(response => {
+      if (response.errors) {
+        return response.errors;
+      } else {
+        throw response.data;
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
 };
 
-export const requestTx = (tx: any, userId: string): Promise<any> => graphql({
-  query: `
+export const requestTx = (tx: any, userId: string): Promise<any> =>
+  graphql({
+    query: `
     mutation signTransactionRequest($input: RequestSignTransactionInput!)  {
       requestSignTransaction(input: $input) {
         requestId
       }
     }
   `,
-  variables: {
-    input: {
-      transaction: tx,
-      userId,
-      serviceId: storage.read('clientId'),
-      autoRedirect: false,
-    },
-  },
-}).then((data) => data.requestSignTransaction);
+    variables: {
+      input: {
+        transaction: tx,
+        userId,
+        serviceId: storage.read("clientId"),
+        autoRedirect: false
+      }
+    }
+  })
+    .then(data => {
+      return data.requestSignTransaction;
+    })
+    .catch(err => {
+      throw err;
+    });
