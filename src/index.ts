@@ -64,7 +64,9 @@ const canPass = {
         return signTx(requestId, userId, userName);
       })
       .then(data => callback(null, data))
-      .catch(err => callback(err));
+      .catch(err => {
+        return callback(err);
+      });
   },
 
   loginButton() {
