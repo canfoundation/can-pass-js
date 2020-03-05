@@ -76,7 +76,7 @@ const popup = (URL: string): Promise<any> => {
     window[eventRemoveMethod](messageEvent, eventHandler, false);
     if (currentWindow) {
       currentWindow.close();
-      currentWindow = null;
+      delete window[window[CURRENT_WINDOW]];
     }
     if (authWindow) authWindow.close();
   };

@@ -23,9 +23,9 @@ export const graphql = (body: {
     .then(res => res.json())
     .then(response => {
       if (response.errors) {
-        return response.errors;
+        throw response.errors;
       } else {
-        throw response.data;
+        return response.data;
       }
     })
     .catch(err => {
