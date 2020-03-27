@@ -14,10 +14,12 @@ declare global {
 export interface CanPassApiConfig {
   clientId: string;
   version: string;
+  endPoint: string; // can-keys
   store?: string;
   fetch?: () => Promise<any>;
   logger?: Logger;
 }
+
 
 const canPass = {
   init(config: CanPassApiConfig) {
@@ -26,12 +28,15 @@ const canPass = {
 
     storage.write("clientId", config.clientId);
     storage.write("version", config.version);
+    storage.write("endPoint", config.endPoint);
+
 
     logger.setLogger(config.logger);
     return config;
   },
 
-  setCredentials(credentials: { idToken: string; accessToken: string }) {
+  
+  setCredentials(credentials: { idToken: string; accessToken: string}) {
     storage.write("accessToken", credentials.accessToken);
     storage.write("idToken", credentials.idToken);
     return credentials;
