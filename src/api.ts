@@ -1,6 +1,5 @@
 // @flow
 import storage from "./storage";
-import { CAN_WALLET_GRAPHQL_ENDPOINT } from "./constants";
 import fetch from "./fetch";
 
 export const graphql = (body: {
@@ -8,18 +7,20 @@ export const graphql = (body: {
   variables: {};
 }): Promise<any> => {
   const accessToken = storage.read("accessToken");
+  const endPoint = storage.read("endPoint") || 'https://dev.api.cryptobadge.app/can-keys-test/graphql';
+
   const config = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bear ${accessToken}`
+      Authorization: `Bearer ${accessToken}`
     },
     body: JSON.stringify({
       query: body.query,
       variables: body.variables
     })
   };
-  return fetch(CAN_WALLET_GRAPHQL_ENDPOINT, config)
+  return fetch(endPoint, config)
     .then(res => res.json())
     .then(response => {
       if (response.errors) {
