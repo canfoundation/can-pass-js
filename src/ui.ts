@@ -2,9 +2,12 @@
 
 import { CAN_PASS_SIGN_TX_URL } from "./constants";
 import logger from "./logger";
+import storage from "./storage";
 
 const SIGN_TRANSACTION_MESSAGE_TYPE = "sign-transaction";
 const CURRENT_WINDOW = "currentWindowRef";
+
+const getSignTxURL = () => storage.read("signTxURL") || CAN_PASS_SIGN_TX_URL;
 
 const randomString = () =>
   (+new Date() * Math.random()).toString(36).substring(0, 8);
@@ -36,7 +39,7 @@ export const openPopup = (asyncPopup?: boolean, url?: string) => {
     left=${windowArea.left},top=${windowArea.top}`;
 
   const authWindow = window.open(
-    url || CAN_PASS_SIGN_TX_URL,
+    url || getSignTxURL(),
     "producthuntPopup",
     windowOpts
   );
@@ -109,7 +112,7 @@ export const signTx = (
   userId: string,
   userName: string
 ): Promise<any> => {
-  const url = `${CAN_PASS_SIGN_TX_URL}?txId=${txId}&userId=${userId}&userName=${userName}`;
+  const url = `${getSignTxURL()}?txId=${txId}&userId=${userId}&userName=${userName}`;
   return popup(url).then(data => {
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {

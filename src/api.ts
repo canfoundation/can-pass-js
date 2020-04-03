@@ -1,13 +1,14 @@
 // @flow
 import storage from "./storage";
 import fetch from "./fetch";
+import { CAN_KEYS_ENDPOINT } from "./constants";
 
 export const graphql = (body: {
   query: string;
   variables: {};
 }): Promise<any> => {
   const accessToken = storage.read("accessToken");
-  const endPoint = storage.read("endPoint") || 'https://dev.api.cryptobadge.app/can-keys-test/graphql';
+  const endPoint = storage.read("endPoint") || CAN_KEYS_ENDPOINT;
 
   const config = {
     method: "POST",
