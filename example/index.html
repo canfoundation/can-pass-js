@@ -9,23 +9,20 @@
     <button
       class="can-pass-login-button"
       data-width="300"
-      data-redirect-uri="https://api-lol.cryptobadge.app/auth/cryptobadge/callback"
-      data-state="1a2b3c"
+      data-redirect-uri="http://localhost:3000/auth/cif/callback"
+      data-state="yourState"
     ></button>
 
     <script>
-      (function() {
+      (function () {
         const canPass = window.CanPass && window.CanPass.getInstance();
         if (canPass) {
           canPass.init({
-            clientId: "leonardo",
-            version: "1.0"
+            clientId: "473377546d55756f0dc31659f48197f9",
+            version: "1.0",
           });
           canPass.setCredentials({
-            accessToken:
-              "eyJraWQiOiJcL3hrV2hiQzhrbTlteTk2K2tDWXhWZnpXbkkwc1hsSFhiS2J1aXJ4SVRkaz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3YzVhZWU1OS1jMjI5LTQzZjktYWZlNS0xMmZjNWU0MWE1ZGQiLCJldmVudF9pZCI6ImIwOGMwNGY1LTM0NDEtNDc3MS1hNDI3LTM1MmYyYmQzNTRkNyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1NzU5NTI4MDgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy13ZXN0LTIuYW1hem9uYXdzLmNvbVwvdXMtd2VzdC0yXzh6dkFaaFo5UCIsImV4cCI6MTU3NTk1NjQwOCwiaWF0IjoxNTc1OTUyODA4LCJqdGkiOiIyNjhkZTE0Ni1hZDYzLTRjNGMtOGQwYy1iMjNhOTQzOGU1MzEiLCJjbGllbnRfaWQiOiI2cGM5Yjk3NjBoam1mZDJwcDRwYWkxc2ZlZCIsInVzZXJuYW1lIjoiN2M1YWVlNTktYzIyOS00M2Y5LWFmZTUtMTJmYzVlNDFhNWRkIn0.lVbfhaQit0TPKq-3V5eHhgnQcQPsIv0LjlQeqJ4OmEgzdrpKzyKipQchDw52kmOiBAdYaOLADdYtKPJ86vjF56JpNSmfeWe9QahTzAk3x3GbECgt_SiAZz6hbSvWW4q3ve0FDq0Y023S9eAxTMiqG2f_F8M_l_Xtzczza1LpLouW7KSqx9XfiPAxd2tef0kKxjwmcmr1WV6YWQd-xFzldua6wGpfloD94l5lA49ydc0tmQx6c0O4geYVj6bqjFkl1pY1kacWUeDdJT9r1FX7WCvxfiCdkZNeHkM7SisGEz7Y6sBBLR7Vmt3JCk-l1rE4ApeF42M98byKXiIIkUrZ2Q",
-            idToken:
-              "eyJraWQiOiJGOVh4aXJiSkF5Wms4a1EzUmpITzNhWkptSVJWUnd1Q1wvVEF0dk5Rallibz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmODVlYWQ3Ni03NWI2LTQyMTAtYmUyNS00ZGM1NmJlYTAzNGYiLCJ3ZWJzaXRlIjoiaGF6ZWxhbmQiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicHJvZmlsZSI6IlRoaXMgaXMgbXkgZGVzY3JpcHRpb24iLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfQ2h2QjJudmRjIiwiY29nbml0bzp1c2VybmFtZSI6ImhhemVsYW5kKD0peW9wbWFpbC5jb20iLCJwaWN0dXJlIjoiZGF2aWQuanBnIiwiYXVkIjoiMWNmNmM5cG00MTlrdTlwaHNibGx2N28wdnUiLCJldmVudF9pZCI6ImEyZmNiZjRlLTA0ZGMtMTFlOS1iNzBmLTA1MDkxNjYwMjA1MyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTQ1MzY4MTI4LCJuYW1lIjoiaGF6ZWxhbmQgeCIsIm5pY2tuYW1lIjoie1wiY29sb3JcIjp7XCJ0ZXh0XCI6XCIjZmZmZmZmXCIsXCJiYWNrZ3JvdW5kXCI6XCIjZDYyNjM0XCJ9fSIsImV4cCI6MTU0NTM3MTcyOCwiaWF0IjoxNTQ1MzY4MTI4LCJlbWFpbCI6ImhhemVsYW5kQHlvcG1haWwuY29tIn0.It411VcJUkVA_pHBpQYwyyisEToJZ3BF6YLrmd7EMJ-uIUHmV62nez8luGx2SQ6Ui5BsS1X3Kt7606VXrgomstMX7f3mJW2L7rfT-BJ-pH-qxs6CCvMtxSqUb32WmkfmesC_smuWTj3uCsElxVFxvG912l7HeNbDGEo7A3crcJeMG-IecImuneb-K2OY1uOLsuvzqldjidxkBiHmqT522s8MHk7shKAv2ALtRL-90qqoL_G9PxXSuKLnAopSgKduLzcb_aG6fbFnJ88eNTuOBH86Lh8VcYt3B0bFW2Y5uGxeAch8MhhaYlxXOt-DWxiUWWhf7BDtIPeDQX8Z9HyYyA"
+            accessToken: "token",
           });
           canPass.loginButton();
         }
