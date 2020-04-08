@@ -113,7 +113,9 @@ CanPass.init(options);
 | version | string | The version of API |
 
 | store | string | The store which will be used to save data. Supported: `localStore`, `memory` |
+
 | endPoint | string | The endpoint to request transaction information |
+
 | signTxURL | string | Sign transaction place |
 
 ##### Sign a transaction
