@@ -7,4 +7,11 @@ const CAN_PASS_SIGN_TX_URL =
 
 const CAN_KEYS_ENDPOINT = "https://prod.api.cryptobadge.app/can-keys/graphql";
 
-export { CAN_KEYS_ENDPOINT, CAN_PASS_SIGN_TX_URL, LOGIN_BUTTON_CLASS_NAME };
+const CB_WEB = "https://cryptobadge.app";
+
+export {
+  CAN_KEYS_ENDPOINT,
+  CAN_PASS_SIGN_TX_URL,
+  LOGIN_BUTTON_CLASS_NAME,
+  CB_WEB,
+};

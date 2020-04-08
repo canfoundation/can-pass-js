@@ -1,5 +1,5 @@
 import storage from "./storage";
-import { LOGIN_BUTTON_CLASS_NAME } from "./constants";
+import { LOGIN_BUTTON_CLASS_NAME, CB_WEB } from "./constants";
 import injectStyle from "./style";
 
 const MAX_WIDTH = 500;
@@ -27,11 +27,7 @@ export default function initialize(id) {
     if (currentButton) {
       // get Attributes
       const state = getAttribute(currentButton, DATA_STATE, "true");
-      const domain = getAttribute(
-        currentButton,
-        DATA_DOMAIN,
-        "https://test.cryptobadge.app"
-      );
+      const domain = getAttribute(currentButton, DATA_DOMAIN, CB_WEB);
       const text = getAttribute(
         currentButton,
         DATA_TEXT,
