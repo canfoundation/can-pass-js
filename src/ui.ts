@@ -76,7 +76,7 @@ const popup = (URL: URL): Promise<any> => {
   const eventer = window[eventMethod];
   const messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
 
-  const cleanUp = (eventHandler) => {
+  const cleanUp = eventHandler => {
     window[eventRemoveMethod](messageEvent, eventHandler, false);
     if (currentWindow) {
       currentWindow.close();
@@ -86,7 +86,7 @@ const popup = (URL: URL): Promise<any> => {
   };
 
   return new Promise((resolve, reject) => {
-    const eventHandler = (e) => {
+    const eventHandler = e => {
       // if (e.origin !== window.SITE_DOMAIN) {
       //   authWindow.close();
       //   reject(new Error('Not allowed'));
