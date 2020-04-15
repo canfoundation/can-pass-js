@@ -35,7 +35,7 @@ export const graphql = (body: {
     });
 };
 
-export const requestTx = (tx: any, userId: string): Promise<any> =>
+export const requestTx = (tx: any): Promise<any> =>
   graphql({
     query: `
     mutation signTransactionRequest($input: RequestSignTransactionInput!)  {
@@ -47,9 +47,6 @@ export const requestTx = (tx: any, userId: string): Promise<any> =>
     variables: {
       input: {
         transaction: tx,
-        userId,
-        serviceId: storage.read("clientId"),
-        autoRedirect: false
       }
     }
   })
