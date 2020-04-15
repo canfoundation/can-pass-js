@@ -112,7 +112,7 @@ CanPass.init(options);
 
 ##### Sign a transaction
 
-`CanPass.signTx(tx, userId, userName, callback)`
+`CanPass.signTx(tx, userName, callback)`
 
 After call that, it will open a new window to operate signing transaction. Input secret code to sign transaction (Browser required)
 
@@ -121,7 +121,6 @@ After call that, it will open a new window to operate signing transaction. Input
 | Name     | Type                  | Description                                             |
 | -------- | --------------------- | ------------------------------------------------------- |
 | tx       | object                | The body of transaction. For example: `{ actions: [] }` |
-| userId   | string                | The userid of CAN account                               |
 | userName | string                | The username of CAN account                             |
 | callback | `(error, tx) => void` | The callback function when sign transaction.            |
 
