@@ -44,7 +44,7 @@ const canPass = {
   // eslint-disable-next-line
   signTx(
     tx: { actions: Array<any> },
-    userId: string,
+    userId: string, // deprecated
     userName: string,
     callback?: (error: any, data?: any) => any
   ): Promise<any> {
@@ -62,13 +62,13 @@ const canPass = {
     }
 
     return api
-      .requestTx(tx, userId)
-      .then(requestedTx => {
+      .requestTx(tx)
+      .then((requestedTx) => {
         const { requestId } = requestedTx;
-        return signTx(requestId, userId, userName);
+        return signTx(requestId, userName);
       })
-      .then(data => callback(null, data))
-      .catch(err => {
+      .then((data) => callback(null, data))
+      .catch((err) => {
         return callback(err);
       });
   },
@@ -81,7 +81,7 @@ const canPass = {
   api() {
     logger.debug("calling api method");
     return 0;
-  }
+  },
 };
 
 // const CanPass = (function factory() {
@@ -110,7 +110,7 @@ const canPass = {
 //   canPassAsyncInit();
 // }
 
-const CanPass = (function() {
+const CanPass = (function () {
   let instance;
 
   function createInstance() {
@@ -118,12 +118,12 @@ const CanPass = (function() {
   }
 
   return {
-    getInstance: function() {
+    getInstance: function () {
       if (!instance) {
         instance = createInstance();
       }
       return instance;
-    }
+    },
   };
 })();
 

@@ -18,7 +18,7 @@ export const openPopup = (asyncPopup?: boolean, url?: string) => {
     width: Math.floor(window.outerWidth * 0.8),
     height: Math.floor(window.outerHeight * 0.5),
     top: 0,
-    left: 0
+    left: 0,
   };
 
   if (windowArea.width < 1000) {
@@ -53,9 +53,10 @@ export const openPopup = (asyncPopup?: boolean, url?: string) => {
   return authWindow;
 };
 
-const popup = (URL: string): Promise<any> => {
-  const sep = URL.indexOf("?") !== -1 ? "&" : "?";
-  const url = `${URL}${sep}`;
+const popup = (URL: URL): Promise<any> => {
+  let url = URL.toString();
+  const sep = url.indexOf("?") !== -1 ? "&" : "?";
+  url = `${url}${sep}`;
 
   let currentWindow = window[window[CURRENT_WINDOW]];
   let authWindow;
@@ -75,7 +76,7 @@ const popup = (URL: string): Promise<any> => {
   const eventer = window[eventMethod];
   const messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
 
-  const cleanUp = eventHandler => {
+  const cleanUp = (eventHandler) => {
     window[eventRemoveMethod](messageEvent, eventHandler, false);
     if (currentWindow) {
       currentWindow.close();
@@ -85,7 +86,7 @@ const popup = (URL: string): Promise<any> => {
   };
 
   return new Promise((resolve, reject) => {
-    const eventHandler = e => {
+    const eventHandler = (e) => {
       // if (e.origin !== window.SITE_DOMAIN) {
       //   authWindow.close();
       //   reject(new Error('Not allowed'));
@@ -107,13 +108,12 @@ const popup = (URL: string): Promise<any> => {
   });
 };
 
-export const signTx = (
-  txId: string,
-  userId: string,
-  userName: string
-): Promise<any> => {
-  const url = `${getSignTxURL()}?txId=${txId}&userId=${userId}&userName=${userName}`;
-  return popup(url).then(data => {
+export const signTx = (txId: string, userName: string): Promise<any> => {
+  const url = new URL(getSignTxURL());
+  url.searchParams.append("txId", txId);
+  url.searchParams.append("userName", userName);
+
+  return popup(url).then((data) => {
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
         throw new Error(data.error);
