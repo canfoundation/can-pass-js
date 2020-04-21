@@ -108,10 +108,9 @@ const popup = (URL: URL): Promise<any> => {
   });
 };
 
-export const signTx = (txId: string, userName: string): Promise<any> => {
+export const signTx = (txId: string): Promise<any> => {
   const url = new URL(getSignTxURL());
   url.searchParams.append("txId", txId);
-  url.searchParams.append("userName", userName);
 
   return popup(url).then((data) => {
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {

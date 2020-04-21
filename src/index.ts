@@ -44,14 +44,12 @@ const canPass = {
   // eslint-disable-next-line
   signTx(
     tx: { actions: Array<any> },
-    userId: string, // deprecated
-    userName: string,
     callback?: (error: any, data?: any) => any
   ): Promise<any> {
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
-        fn(tx, userId, userName, (err, result) => {
+        fn(tx, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -65,7 +63,7 @@ const canPass = {
       .requestTx(tx)
       .then(requestedTx => {
         const { requestId } = requestedTx;
-        return signTx(requestId, userName);
+        return signTx(requestId);
       })
       .then(data => callback(null, data))
       .catch(err => {
