@@ -9,6 +9,7 @@ const DATA_STATE = "data-state";
 const DATA_REDIRECT_URI = "data-redirect-uri";
 const DATA_DOMAIN = "data-domain";
 const DATA_TEXT = "data-text";
+const OPEN_POPUP_STATE = "open-popup";
 const LOGO_URL =
   "https://d1i5zj4k49u5j1.cloudfront.net/2892b68a3d6c71e94499bb027345fe7c.svg";
 
@@ -41,6 +42,10 @@ export default function initialize(id) {
       const dataRedirectedURI = encodeURIComponent(
         getAttribute(currentButton, DATA_REDIRECT_URI, "")
       );
+      const isOpenPopup =
+        getAttribute(currentButton, OPEN_POPUP_STATE, "false") === "true"
+          ? true
+          : false;
 
       // initial button width
       currentButton.style.width =
@@ -55,9 +60,26 @@ export default function initialize(id) {
 
       currentButton.innerHTML += "<span>" + text + "</span>";
 
+      const openPopup = (url, title, w, h) => {
+        var y = window.outerHeight / 2 + window.screenY - h / 2;
+        var x = window.outerWidth / 2 + window.screenX - w / 2;
+        return window.open(
+          url,
+          title,
+          "width=" + w + ", height=" + h + ", top=" + y + ", left=" + x
+        );
+      };
+
       // add onClick event listener
       currentButton.addEventListener("click", () => {
-        window.location.href = `${domain}/oauth2/authorize?response_type=code&client_id=${clientId}&scope=email&redirect_uri=${dataRedirectedURI}&state=${state}`;
+        isOpenPopup
+          ? openPopup(
+              `${domain}/oauth2/authorize?response_type=code&client_id=${clientId}&scope=email&redirect_uri=${dataRedirectedURI}&state=${state}`,
+              "Login With CryptoBadge",
+              630,
+              800
+            )
+          : (window.location.href = `${domain}/oauth2/authorize?response_type=code&client_id=${clientId}&scope=email&redirect_uri=${dataRedirectedURI}&state=${state}`);
       });
     }
   }
