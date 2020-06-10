@@ -2,6 +2,7 @@
 import storage from "./storage";
 import fetch from "./fetch";
 import { CAN_KEYS_ENDPOINT } from "./constants";
+import { RequestSignTransactionInput } from './types'
 
 export const graphql = (body: {
   query: string;
@@ -35,7 +36,7 @@ export const graphql = (body: {
     });
 };
 
-export const requestTx = (tx: any): Promise<any> =>
+export const requestTx = (input: RequestSignTransactionInput): Promise<any> =>
   graphql({
     query: `
     mutation signTransactionRequest($input: RequestSignTransactionInput!)  {
@@ -45,9 +46,7 @@ export const requestTx = (tx: any): Promise<any> =>
     }
   `,
     variables: {
-      input: {
-        transaction: tx,
-      }
+      input,
     }
   })
     .then(data => {

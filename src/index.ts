@@ -44,8 +44,10 @@ const canPass = {
   // eslint-disable-next-line
   signTx(
     tx: { actions: Array<any> },
-    callback?: (error: any, data?: any) => any
+    callback?: (error: any, data?: any) => any,
+    ots?: any,
   ): Promise<any> {
+    
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
@@ -55,18 +57,18 @@ const canPass = {
           } else {
             resolve(result);
           }
-        });
+        }, {});
       });
     }
 
     return api
-      .requestTx(tx)
-      .then(requestedTx => {
+      .requestTx({ transaction: tx, broadcast: !!ots.broadcast })
+      .then((requestedTx) => {
         const { requestId } = requestedTx;
         return signTx(requestId);
       })
-      .then(data => callback(null, data))
-      .catch(err => {
+      .then((data) => callback(null, data))
+      .catch((err) => {
         return callback(err);
       });
   },
@@ -108,7 +110,7 @@ const canPass = {
 //   canPassAsyncInit();
 // }
 
-const CanPass = (function() {
+const CanPass = (function () {
   let instance;
 
   function createInstance() {
@@ -116,7 +118,7 @@ const CanPass = (function() {
   }
 
   return {
-    getInstance: function() {
+    getInstance: function () {
       if (!instance) {
         instance = createInstance();
       }
