@@ -113,8 +113,6 @@ export const signTx = (txId: string): Promise<any> => {
   url.searchParams.append("txId", txId);
 
   return popup(url).then((data) => {
-    console.log("data", data)
-
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
         throw new Error(data.error);
