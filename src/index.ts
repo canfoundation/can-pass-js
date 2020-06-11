@@ -62,7 +62,7 @@ const canPass = {
     }
 
     return api
-      .requestTx({ transaction: tx, broadcast: !!ots.broadcast })
+      .requestTx(tx, !!ots.broadcast )
       .then((requestedTx) => {
         const { requestId } = requestedTx;
         return signTx(requestId);
