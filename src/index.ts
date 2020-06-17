@@ -4,6 +4,7 @@ import { openPopup, signTx } from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
 import logger, { Logger } from "./logger";
+import { RequestSignTxOptions } from './types';
 
 declare global {
   interface Window {
@@ -45,7 +46,7 @@ const canPass = {
   signTx(
     tx: { actions: Array<any> },
     callback?: (error: any, data?: any) => any,
-    ots?: any,
+    ots?: RequestSignTxOptions,
   ): Promise<any> {
     
     if (callback === undefined) {
@@ -57,12 +58,12 @@ const canPass = {
           } else {
             resolve(result);
           }
-        }, {});
+        }, ots);
       });
     }
 
     return api
-      .requestTx(tx, !!ots.broadcast )
+      .requestTx(tx, ots)
       .then((requestedTx) => {
         const { requestId } = requestedTx;
         return signTx(requestId);
