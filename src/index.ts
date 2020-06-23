@@ -4,6 +4,7 @@ import { openPopup, signTx } from "./ui";
 import loginButton from "./login-button";
 import { set as setFetch } from "./fetch";
 import logger, { Logger } from "./logger";
+import { RequestSignTxOptions } from './types';
 
 declare global {
   interface Window {
@@ -44,12 +45,14 @@ const canPass = {
   // eslint-disable-next-line
   signTx(
     tx: { actions: Array<any> },
-    callback?: (error: any, data?: any) => any
+    signTxOption?: RequestSignTxOptions,
+    callback?: (error: any, data?: any) => any,
   ): Promise<any> {
+    
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
-        fn(tx, (err, result) => {
+        fn(tx, signTxOption, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -60,13 +63,13 @@ const canPass = {
     }
 
     return api
-      .requestTx(tx)
-      .then(requestedTx => {
+      .requestTx(tx, signTxOption)
+      .then((requestedTx) => {
         const { requestId } = requestedTx;
         return signTx(requestId);
       })
-      .then(data => callback(null, data))
-      .catch(err => {
+      .then((data) => callback(null, data))
+      .catch((err) => {
         return callback(err);
       });
   },
@@ -108,7 +111,7 @@ const canPass = {
 //   canPassAsyncInit();
 // }
 
-const CanPass = (function() {
+const CanPass = (function () {
   let instance;
 
   function createInstance() {
@@ -116,7 +119,7 @@ const CanPass = (function() {
   }
 
   return {
-    getInstance: function() {
+    getInstance: function () {
       if (!instance) {
         instance = createInstance();
       }

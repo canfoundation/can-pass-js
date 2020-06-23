@@ -119,7 +119,7 @@ export const signTx = (txId: string): Promise<any> => {
       }
 
       if (data.requestTxId === txId) {
-        return data.tx;
+        return data.trx;
       }
     }
   });
