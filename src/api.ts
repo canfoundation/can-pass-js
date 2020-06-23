@@ -46,15 +46,20 @@ export const requestTx = (transaction: any, ots: RequestSignTxOptions): Promise<
     }
   };
 
-  if(!broadcast && payer && addAuths) {
+  if(!broadcast && addAuths) {
     // add additional authorization
     input.addAuths = addAuths;
 
     // add payer
-    input.transaction.actions[0].authorization.push({
-      actor: payer,
-      permission: "active"
-    })
+    const actionsWithPayer = transaction.actions.map(action => ({
+      ...action,
+      authorization: [
+        ...action.authorization,
+        { actor: payer, permission: "active" },
+      ],
+    }));
+
+    input.transaction.actions = actionsWithPayer;
   }
 
   return graphql({

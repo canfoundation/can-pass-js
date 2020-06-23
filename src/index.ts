@@ -45,25 +45,25 @@ const canPass = {
   // eslint-disable-next-line
   signTx(
     tx: { actions: Array<any> },
+    signTxOption?: RequestSignTxOptions,
     callback?: (error: any, data?: any) => any,
-    ots?: RequestSignTxOptions,
   ): Promise<any> {
     
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
-        fn(tx, (err, result) => {
+        fn(tx, signTxOption, (err, result) => {
           if (err) {
             reject(err);
           } else {
             resolve(result);
           }
-        }, ots);
+        });
       });
     }
 
     return api
-      .requestTx(tx, ots)
+      .requestTx(tx, signTxOption)
       .then((requestedTx) => {
         const { requestId } = requestedTx;
         return signTx(requestId);
