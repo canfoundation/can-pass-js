@@ -36,8 +36,8 @@ export const graphql = (body: {
     });
 };
 
-export const requestTx = (transaction: any, ots: RequestSignTxOptions): Promise<any> => {
-  const { broadcast, payer,  addAuths} = ots
+export const requestTx = (transaction: any, signTxOption: RequestSignTxOptions): Promise<any> => {
+  const { broadcast, addAuths} = signTxOption;
 
   const input: any = {
     transaction,
@@ -55,7 +55,7 @@ export const requestTx = (transaction: any, ots: RequestSignTxOptions): Promise<
       ...action,
       authorization: [
         ...action.authorization,
-        { actor: payer, permission: "active" },
+        { actor: addAuths[0].actor, permission: "active" },
       ],
     }));
 
