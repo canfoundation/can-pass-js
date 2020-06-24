@@ -43,6 +43,7 @@ export const requestTx = (transaction: any, signTxOption: RequestSignTxOptions):
     transaction,
     trxOpt: {
       broadcast,
+       expireSeconds: 30,
     }
   };
 
