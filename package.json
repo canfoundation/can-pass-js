@@ -22,7 +22,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts}": [
+    "./src/*.{ts}": [
       "yarn lint:fix",
       "git add --force"
     ]
