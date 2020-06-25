@@ -23,15 +23,15 @@ export const graphql = (body: {
     }),
   };
   return fetch(endPoint, config)
-    .then((res) => res.json())
-    .then((response) => {
+    .then(res => res.json())
+    .then(response => {
       if (response.errors) {
         throw response.errors;
       } else {
         return response.data;
       }
     })
-    .catch((err) => {
+    .catch(err => {
       throw err;
     });
 };
@@ -52,7 +52,7 @@ export const requestTx = (transaction: any, signTxOption: RequestSignTxOptions):
     input.addAuths = addAuths;
 
     // add payer
-    const actionsWithPayer = transaction.actions.map((action) => ({
+    const actionsWithPayer = transaction.actions.map(action => ({
       ...action,
       authorization: [
         ...action.authorization,
@@ -75,8 +75,8 @@ export const requestTx = (transaction: any, signTxOption: RequestSignTxOptions):
       input,
     },
   })
-    .then((data) => data.requestSignTransaction)
-    .catch((err) => {
+    .then(data => data.requestSignTransaction)
+    .catch(err => {
       throw err;
     });
 };

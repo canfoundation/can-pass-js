@@ -63,12 +63,12 @@ const canPass = {
 
     return api
       .requestTx(tx, signTxOption)
-      .then((requestedTx) => {
+      .then(requestedTx => {
         const { requestId } = requestedTx;
         return signTx(requestId);
       })
-      .then((data) => callback(null, data))
-      .catch((err) => callback(err));
+      .then(data => callback(null, data))
+      .catch(err => callback(err));
   },
 
   loginButton() {

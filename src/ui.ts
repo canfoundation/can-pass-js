@@ -75,7 +75,7 @@ const popup = (URL: URL): Promise<any> => {
   const eventer = window[eventMethod];
   const messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
 
-  const cleanUp = (eventHandler) => {
+  const cleanUp = eventHandler => {
     window[eventRemoveMethod](messageEvent, eventHandler, false);
     if (currentWindow) {
       currentWindow.close();
@@ -85,7 +85,7 @@ const popup = (URL: URL): Promise<any> => {
   };
 
   return new Promise((resolve, reject) => {
-    const eventHandler = (e) => {
+    const eventHandler = e => {
       // if (e.origin !== window.SITE_DOMAIN) {
       //   authWindow.close();
       //   reject(new Error('Not allowed'));
@@ -112,7 +112,7 @@ export const signTx = (txId: string): Promise<any> => {
   url.searchParams.append('txId', txId);
 
   /* eslint-disable consistent-return */
-  return popup(url).then((data) => {
+  return popup(url).then(data => {
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
         throw new Error(data.error);
