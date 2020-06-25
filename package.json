@@ -16,6 +16,17 @@
     "lint": "eslint --ext .ts --ignore-path .gitignore",
     "lint:fix": "eslint --fix . --ext .ts --ignore-path .gitignore"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "yarn lint:fix",
+      "git add --force"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/canfoundation/can-pass-js"
@@ -38,8 +49,10 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "flow-bin": "^0.113.0",
+    "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "lint-staged": "^10.2.11",
     "rollup": "^1.27.8",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-dotenv": "^0.2.0",

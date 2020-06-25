@@ -111,7 +111,6 @@ export const signTx = (txId: string): Promise<any> => {
   const url = new URL(getSignTxURL());
   url.searchParams.append('txId', txId);
 
-  /* eslint-disable consistent-return */
   return popup(url).then((data) => {
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
