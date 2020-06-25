@@ -65,6 +65,7 @@ export default function initialize(id) {
 
       // add onClick event listener
       currentButton.addEventListener('click', () => {
+        /* eslint-disable no-unused-expressions */
         isOpenPopup
           ? openPopup(
             `${domain}/oauth2/authorize?response_type=code&client_id=${clientId}&scope=email&redirect_uri=${dataRedirectedURI}&state=${state}`,

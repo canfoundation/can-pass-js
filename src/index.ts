@@ -1,9 +1,9 @@
-import storage, { initialize as initializeStorage } from "./storage";
-import * as api from "./api";
-import { openPopup, signTx } from "./ui";
-import loginButton from "./login-button";
-import { set as setFetch } from "./fetch";
-import logger, { Logger } from "./logger";
+import storage, { initialize as initializeStorage } from './storage';
+import * as api from './api';
+import { openPopup, signTx } from './ui';
+import loginButton from './login-button';
+import { set as setFetch } from './fetch';
+import logger, { Logger } from './logger';
 import { RequestSignTxOptions } from './types';
 
 declare global {
@@ -27,18 +27,18 @@ const canPass = {
     if (config.store) initializeStorage(config.store);
     if (config.fetch) setFetch(config.fetch);
 
-    storage.write("clientId", config.clientId);
-    storage.write("version", config.version);
-    storage.write("endPoint", config.endPoint);
-    storage.write("signTxURL", config.signTxURL);
+    storage.write('clientId', config.clientId);
+    storage.write('version', config.version);
+    storage.write('endPoint', config.endPoint);
+    storage.write('signTxURL', config.signTxURL);
 
     logger.setLogger(config.logger);
     return config;
   },
 
   setCredentials(credentials: { idToken: string; accessToken: string }) {
-    storage.write("accessToken", credentials.accessToken);
-    storage.write("idToken", credentials.idToken);
+    storage.write('accessToken', credentials.accessToken);
+    storage.write('idToken', credentials.idToken);
     return credentials;
   },
 
@@ -48,7 +48,6 @@ const canPass = {
     signTxOption?: RequestSignTxOptions,
     callback?: (error: any, data?: any) => any,
   ): Promise<any> {
-    
     if (callback === undefined) {
       const fn = this.signTx;
       return new Promise((resolve, reject) => {
@@ -69,18 +68,16 @@ const canPass = {
         return signTx(requestId);
       })
       .then((data) => callback(null, data))
-      .catch((err) => {
-        return callback(err);
-      });
+      .catch((err) => callback(err));
   },
 
   loginButton() {
-    const clientId = storage.read("clientId");
+    const clientId = storage.read('clientId');
     loginButton(clientId);
   },
 
   api() {
-    logger.debug("calling api method");
+    logger.debug('calling api method');
     return 0;
   },
 };
@@ -111,6 +108,7 @@ const canPass = {
 //   canPassAsyncInit();
 // }
 
+/* eslint-disable func-names */
 const CanPass = (function () {
   let instance;
 
@@ -119,16 +117,16 @@ const CanPass = (function () {
   }
 
   return {
-    getInstance: function () {
+    getInstance() {
       if (!instance) {
         instance = createInstance();
       }
       return instance;
     },
   };
-})();
+}());
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   window.CanPass = CanPass;
 }
 

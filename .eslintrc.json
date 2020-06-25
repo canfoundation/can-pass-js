@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "env": {
         "browser": true,
         "es6": true,
@@ -22,6 +22,9 @@
         "sourceType": "module"
     },
     "rules": {
+        "import/extensions": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-explicit-any": 0
     },
     "settings": {
         "import/resolver": {
