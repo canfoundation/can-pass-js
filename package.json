@@ -12,7 +12,20 @@
     "build": "rm -rf dist lib && rollup -c && tsc -p .",
     "watch": "yarn run build -w",
     "test": "jest",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "lint": "eslint . --ext .ts --ignore-path .gitignore",
+    "lint:fix": "eslint . --fix --ext .ts --ignore-path .gitignore"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn lint:fix",
+      "git add --force"
+    ]
   },
   "repository": {
     "type": "git",
@@ -30,21 +43,22 @@
     "@babel/preset-typescript": "^7.7.7",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "babel-eslint": "^10.0.3",
+    "@typescript-eslint/parser": "^3.4.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "flow-bin": "^0.113.0",
+    "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "lint-staged": "^10.2.11",
     "rollup": "^1.27.8",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-dotenv": "^0.2.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-uglify": "^6.0.3",
-    "typescript": "^3.7.4"
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "insert-css": "^2.0.0"

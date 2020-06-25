@@ -1,8 +1,8 @@
-import { global } from "./utils";
+import { global } from './utils';
 
 let fetch = global.fetch && global.fetch.bind(global);
 
-export const set = f => {
+export const set = (f): any => {
   fetch = f;
 };
 

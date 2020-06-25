@@ -1,7 +1,6 @@
-import insertCSS from "insert-css";
+import insertCSS from 'insert-css';
 
-const inject = () =>
-  insertCSS(`
+const inject = () => insertCSS(`
   .can-pass-login-button {
     border-radius: 5px;
     background-color: rgb(255, 255, 0);

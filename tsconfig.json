@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "noImplicitAny": false,
-    "removeComments": true,
+    "removeComments": false,
     "inlineSourceMap": true,
     "inlineSources": true,
     "preserveConstEnums": true,
