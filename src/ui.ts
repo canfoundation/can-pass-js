@@ -113,13 +113,14 @@ export const signTx = (txId: string): Promise<any> => {
 
   /* eslint-disable consistent-return */
   return popup(url).then(data => {
+
     if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
         throw new Error(data.error);
       }
 
       if (data.requestTxId === txId) {
-        return data.trx;
+        return data;
       }
     }
   });
