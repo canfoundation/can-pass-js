@@ -1,7 +1,10 @@
 /* global test, expect */
 import CanPass from "../index";
 import Storage, { LOCAL_STORAGE, MEMORY_STORAGE } from "../storage";
-import { global } from "../utils";
+// import { global } from "../utils";
+
+
+
 
 describe("Initialize CanPass", () => {
   const info = {
@@ -13,7 +16,7 @@ describe("Initialize CanPass", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks()
+    // jest.resetAllMocks()
   })
 
   test("with memory", () => {
@@ -26,17 +29,18 @@ describe("Initialize CanPass", () => {
   });
 
   test("with browser localStorage", () => {
-    const window = {
+    const mockWindow = {
       localStorage: {
         setItem: () => {},
       },
     };
 
-    jest.doMock("../utils", () => {
-      return { global: 'abc' };
-    });
+    jest.mock("../utils", () => ({
+      global: mockWindow
+    }));
+    const { global } = require('../utils')
+    // expect(global).toEqual("");
 
-    expect(global).toEqual("");
     CanPass.init({ ...info, store: LOCAL_STORAGE });
 
     expect(Storage.read("clientId")).toEqual(info.clientId);
