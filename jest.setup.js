@@ -1,0 +1,1 @@
+Object.defineProperty(Window, 'localStorage', { setItem: () => {} });
