@@ -14,7 +14,6 @@ const storageMap = {
 let storage = localStore;
 
 export const initialize = (type: string) => {
-  console.log("initialize -> type", type)
   storage = storageMap[type] || storageMap[MEMORY_STORAGE];
 };
 

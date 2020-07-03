@@ -6,7 +6,6 @@ export default {
   },
 
   set(key, value) {
-    console.log(global)
     return global.localStorage.setItem(key, value);
   },
 
