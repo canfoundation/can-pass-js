@@ -11,3 +11,4 @@ deploy:
     tags: true
     branch: master
     repo: canfoundation/can-pass-js
+  script: npm run test

@@ -29,10 +29,7 @@ describe("Initialize CanPass", () => {
 
   it("with browser localStorage", () => {
     CanPass.init({ ...info, store: LOCAL_STORAGE });
-
-    expect(Storage.read("clientId")).toEqual(info.clientId);
-    expect(Storage.read("endPoint")).toEqual(info.endPoint);
-    expect(Storage.read("signTxURL")).toEqual(info.signTxURL);
-    expect(Storage.read("version")).toEqual(info.version);
+    
+    assertResults();
   });
 });
