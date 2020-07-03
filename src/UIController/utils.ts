@@ -1,8 +1,6 @@
-// @flow
-
-import { CAN_PASS_SIGN_TX_URL } from './constants';
-import logger from './logger';
-import storage from './storage';
+import { CAN_PASS_SIGN_TX_URL } from '../constants';
+import logger from '../logger';
+import storage from '../storage';
 
 const SIGN_TRANSACTION_MESSAGE_TYPE = 'sign-transaction';
 const CURRENT_WINDOW = 'currentWindowRef';
@@ -11,7 +9,7 @@ const getSignTxURL = () => storage.read('signTxURL') || CAN_PASS_SIGN_TX_URL;
 
 const randomString = () => (+new Date() * Math.random()).toString(36).substring(0, 8);
 
-export const openPopup = (asyncPopup?: boolean, url?: string) => {
+const openPopup = (asyncPopup?: boolean, url?: string) => {
   if (typeof window === 'undefined') throw new Error('Not Browser');
   const windowArea = {
     width: Math.floor(window.outerWidth * 0.8),
@@ -86,11 +84,6 @@ const popup = (URL: URL): Promise<any> => {
 
   return new Promise((resolve, reject) => {
     const eventHandler = e => {
-      // if (e.origin !== window.SITE_DOMAIN) {
-      //   authWindow.close();
-      //   reject(new Error('Not allowed'));
-      // }
-
       if (!e.data) {
         logger.debug('window opener return error', e);
         cleanUp(eventHandler);
@@ -107,21 +100,10 @@ const popup = (URL: URL): Promise<any> => {
   });
 };
 
-export const signTx = (txId: string): Promise<any> => {
-  const url = new URL(getSignTxURL());
-  url.searchParams.append('txId', txId);
-
-  /* eslint-disable consistent-return */
-  return popup(url).then(data => {
-
-    if (data.type === SIGN_TRANSACTION_MESSAGE_TYPE) {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      if (data.requestTxId === txId) {
-        return data;
-      }
-    }
-  });
-};
+export {
+  SIGN_TRANSACTION_MESSAGE_TYPE,
+  CURRENT_WINDOW,
+  getSignTxURL,
+  openPopup,
+  popup,
+}

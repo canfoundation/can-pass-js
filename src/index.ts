@@ -1,6 +1,6 @@
 import storage, { initialize as initializeStorage } from './storage';
 import * as api from './api';
-import { openPopup, signTx } from './ui';
+import { signTx } from './UIController';
 import loginButton from './login-button';
 import { set as setFetch } from './fetch';
 import logger, { Logger } from './logger';
@@ -130,5 +130,5 @@ if (typeof window !== 'undefined') {
   window.CanPass = CanPass;
 }
 
-export { openPopup };
+// export { openPopup: UIUtils.openPopup };
 export default canPass;
