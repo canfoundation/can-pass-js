@@ -10,7 +10,7 @@ describe("Initialize CanPass", () => {
   const info = {
     clientId: "leonardo",
     endPoint: "Hogwarts",
-    signTxURL: "Harry Potter",
+    signTxURL: "https://can-pass.canfoundation.io/sign-transaction",
     version: "v1.0",
     store: MEMORY_STORAGE,
   };
@@ -35,7 +35,7 @@ describe("Initialize CanPass", () => {
   });
 });
 
-fdescribe("UI CanPass", () => {
+describe("UI CanPass", () => {
   let expectedSigntxUrl;
   const windowRef = "windowRef";
   const signTxUrl = "http://can-pass.canfoundation.io/";
@@ -67,44 +67,40 @@ fdescribe("UI CanPass", () => {
   it("popup function", () => {
     const ref = UIUtils.popup(signTxUrl);
 
+    // TODO add more test cases here
     expect(ref instanceof Promise).toBeTruthy();
   });
 
-  it("signTx success", async () => {
+  it("signTx function", async () => {
     const requestTxId = "123";
     const resolvedVal = {
       type: UIUtils.SIGN_TRANSACTION_MESSAGE_TYPE,
       requestTxId,
     };
-    
+
+    const rejectedVal = {
+      type: UIUtils.SIGN_TRANSACTION_MESSAGE_TYPE,
+      error: "huh?",
+    };
 
     const spyOnPopup = jest.spyOn(UIUtils, "popup");
-    spyOnPopup.mockReturnValueOnce(new Promise(resolve => resolve(resolvedVal)));
-    // spyOnPopup.mockReturnValueOnce(
-    //   new Promise(resolve => resolve(rejectedVal))
-    // );
 
-    const resolvedResponse = await signTx(requestTxId);
-    // const rejectedResponse = await signTx(requestTxId);
+    spyOnPopup
+    .mockReturnValueOnce(
+      new Promise(resolve => resolve(resolvedVal))
+    ).mockReturnValueOnce(
+      new Promise(resolve => resolve(rejectedVal))
+    );
 
-    expect(spyOnPopup).toHaveBeenCalledTimes(1);
-    expect(resolvedResponse).toEqual(resolvedVal);
-    // expect(rejectedResponse).toEqual(rejectedVal);
+    try {
+      const resolvedResponse = await signTx(requestTxId);
+      await signTx(requestTxId);
+
+      expect(spyOnPopup).toHaveBeenCalledTimes(2);
+      expect(resolvedResponse).toEqual(resolvedVal);
+
+    } catch(e) {
+      expect(e.message).toEqual(rejectedVal.error);
+    }
   });
-  // it("signTx failed", async () => {
-  //   const requestTxId = "123";
-  //   const rejectedVal = {
-  //     error: "huh?",
-  //   };
-
-  //   const spyOnPopup = jest.spyOn(UIUtils, "popup");
-  //   spyOnPopup.mockReturnValueOnce(
-  //     new Promise((_, reject) => reject(rejectedVal))
-  //   );
-
-  //   const rejectedResponse = await signTx(requestTxId);
-
-  //   expect(spyOnPopup).toHaveBeenCalledTimes(1);
-  //   expect(rejectedResponse).toEqual(rejectedVal);
-  // });
 });

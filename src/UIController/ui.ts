@@ -7,8 +7,6 @@ export const signTx = (txId: string): Promise<any> => {
 
   /* eslint-disable consistent-return */
   return UIUtils.popup(url).then(data => {
-    console.log("data", data)
-
     if (data.type === UIUtils.SIGN_TRANSACTION_MESSAGE_TYPE) {
       if (data.error) {
         throw new Error(data.error);
