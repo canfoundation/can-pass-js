@@ -6,14 +6,20 @@
 
 [![https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/can-pass-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/can-pass-js)
 
+[![](https://data.jsdelivr.com/v1/package/npm/can-pass-js/badge)](https://www.jsdelivr.com/package/npm/can-pass-js)
+
 It is a sdk for can-pass which facilitates 3rd party 's developers experience when they are working with can-pass api.
 
 #### Loading the SDK
 
 Using script below to load the SDK.
 
-```javascript
+```html
+<!-- self build -->
 <script src="../lib/can-pass-api.js"></script>
+
+<!-- Or CDN -->
+<script src="https://cdn.jsdelivr.net/npm/can-pass-js@1.1.5/dist/index.min.js"></script>
 ```
 
 After the SDK has loaded, it will call the `init` function, so you should define that function to init the SDK.
